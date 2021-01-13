@@ -1,0 +1,40 @@
+description: IxChariot server shell
+imports:
+- cloudshell_standard: cloudshell_traffic_generator_chassis_standard_1_0_3.yaml
+metadata:
+  template_author: Quali
+  template_icon: shell-icon.png
+  template_name: IxChariot Server Shell 2G
+  template_version: 2.0.0
+node_types:
+  vendor.IxChariot Server Shell 2G:
+    derived_from: cloudshell.nodes.TrafficGeneratorChassis
+    properties:
+      GenericTrafficGeneratorModule.Management IP:
+        description: The IP address if the Endpoint.
+        type: string
+        default: ''
+        tags: [setting, abstract_filter, read_only]
+      GenericTrafficGeneratorModule.OS Version:
+        description: The OS version of the Endpoint.
+        type: string
+        default: ''
+        tags: [setting, abstract_filter, read_only]
+    artifacts:
+      driver:
+        file: IxChariotServerShell2GDriver.zip
+        type: tosca.artifacts.File
+      icon:
+        file: shell-icon.png
+        type: tosca.artifacts.File
+    capabilities:
+      auto_discovery_capability:
+        properties:
+          Client Install Path:
+            type: string
+          User:
+            type: string
+          Password:
+            type: cloudshell.datatypes.Password
+        type: cloudshell.capabilities.AutoDiscovery
+tosca_definitions_version: tosca_simple_yaml_1_0
